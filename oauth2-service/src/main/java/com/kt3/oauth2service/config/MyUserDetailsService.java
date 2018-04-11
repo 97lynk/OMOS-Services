@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throws UsernameNotFoundException {
 
         logger.info("Via UserDetailService");
-        Account account = service.getAccountByUserName(userName);
+        Account account = service.selectAccountByUserName(userName);
         if(account == null)
             throw new UsernameNotFoundException("Tài khoản không tồn tại");
         logger.info(account.toString());

@@ -5,6 +5,9 @@ import com.kt3.accountservice.servive.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +28,7 @@ public class AccountAPI {
 
     /**
      * lấy hết danh sách account
+     *
      * @return
      */
     @GetMapping
@@ -35,6 +39,7 @@ public class AccountAPI {
 
     /**
      * Thêm account mới - hiện thực chức năng đăng kí
+     *
      * @param account
      */
     @PostMapping
@@ -65,6 +70,5 @@ public class AccountAPI {
     public void deleteAccount(@PathVariable int id) {
         accountService.deleteAccount(id);
     }
-
 
 }

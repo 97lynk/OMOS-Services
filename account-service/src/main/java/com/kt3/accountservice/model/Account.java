@@ -29,7 +29,6 @@ public class Account implements Serializable {
     @JoinColumn(name = "id")
     private Profile profile;
 
-
     private boolean enabled;
 
 
