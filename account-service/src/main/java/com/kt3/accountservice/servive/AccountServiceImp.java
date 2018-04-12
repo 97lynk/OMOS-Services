@@ -5,6 +5,7 @@ import com.kt3.accountservice.model.Profile;
 import com.kt3.accountservice.reponsitory.AccountRepository;
 import com.kt3.accountservice.reponsitory.ProfileReponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -85,14 +86,14 @@ public class AccountServiceImp implements AccountService {
             throw new NoSuchElementException("This account does not exist");
 
         Account oldAccount = accountRepository.findOne(account.getId());
-        oldAccount.setPassword(account.getPassword());
+        oldAccount.setPassword(BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()));
         oldAccount.setEnabled(account.isEnabled());
         return accountRepository.save(oldAccount);
     }
 
     @Override
     public Account insertAccount(Account account) {
-        Account newAccount = new Account(account.getUserName(), account.getPassword());
+        Account newAccount = new Account(account.getUserName(), BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()));
         return accountRepository.save(newAccount);
     }
 

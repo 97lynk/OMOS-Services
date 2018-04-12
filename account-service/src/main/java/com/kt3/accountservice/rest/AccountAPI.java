@@ -4,12 +4,11 @@ import com.kt3.accountservice.model.Account;
 import com.kt3.accountservice.servive.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,15 +25,15 @@ public class AccountAPI {
 
     private static final Logger logger = Logger.getLogger(AccountAPI.class.getName());
 
+    AbstractMap.SimpleEntry successMessage = new AbstractMap.SimpleEntry<>("message", "success");
     /**
      * lấy hết danh sách account
      *
      * @return
      */
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<Account> getAllAccounts() {
-        return accountService.selectAccounts();
+    public ResponseEntity<List<Account>> getAllAccounts() {
+        return ResponseEntity.ok(accountService.selectAccounts());
     }
 
     /**
@@ -43,9 +42,9 @@ public class AccountAPI {
      * @param account
      */
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addNewAccount(@RequestBody Account account) {
+    public ResponseEntity<?> addNewAccount(@RequestBody Account account) {
         accountService.insertAccount(account);
+        return ResponseEntity.status(HttpStatus.CREATED).body(successMessage);
     }
 
     /**
@@ -54,10 +53,10 @@ public class AccountAPI {
      * @param account profile có id cũ, có các thuộc tính mới sẽ cập nhật
      */
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void changeAccount(@PathVariable("id") int id, @RequestBody Account account) {
+    public ResponseEntity<?> changeAccount(@PathVariable("id") int id, @RequestBody Account account) {
         account.setId(id);
         accountService.updateAccount(account);
+        return ResponseEntity.ok(successMessage);
     }
 
     /**
@@ -66,9 +65,10 @@ public class AccountAPI {
      * @param id
      */
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteAccount(@PathVariable int id) {
+    public ResponseEntity<?> deleteAccount(@PathVariable int id) {
         accountService.deleteAccount(id);
+        return ResponseEntity.ok(successMessage);
+
     }
 
 }
