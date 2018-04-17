@@ -3,6 +3,8 @@ package com.kt3.menuservice.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,14 +22,14 @@ public class Category implements Serializable{
     @ManyToOne
     private Category parent;
     @OneToMany(mappedBy = "parent")
-    private Set<Category> childs;
-    @OneToMany(mappedBy = "category")
-    private Set<Product> products;
+    private List<Category> childs = new ArrayList<>();
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
+    private List<Product> products  = new ArrayList<>();
 
     public Category() {
     }
 
-    public Category(String name, String code, String description, String image, Date updateDate, boolean status, Category parent, Set<Category> childs, Set<Product> products) {
+    public Category(String name, String code, String description, String image, Date updateDate, boolean status, Category parent, List<Category> childs, List<Product> products) {
         this.name = name;
         this.code = code;
         this.description = description;
@@ -103,19 +105,24 @@ public class Category implements Serializable{
         this.parent = parent;
     }
 
-    public Set<Category> getChilds() {
+    public List<Category> getChilds() {
         return childs;
     }
 
-    public void setChilds(Set<Category> childs) {
+    public void setChilds(List<Category> childs) {
         this.childs = childs;
     }
 
-    public Set<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(List<Product> products) {
+//        for (Product p: products
+//             ) {
+//            p.setCategory(this);
+//
+//        }
         this.products = products;
     }
 }

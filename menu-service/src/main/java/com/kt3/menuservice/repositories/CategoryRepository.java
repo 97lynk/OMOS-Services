@@ -1,11 +1,12 @@
 package com.kt3.menuservice.repositories;
 
 import com.kt3.menuservice.model.Category;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Set;
+import java.util.List;
 
-public interface CategoryRepository extends CrudRepository<Category, Long>{
-    Set<Category> findCategoriesByCodeContains(String code);
-    Set<Category> findCategoriesByNameContains(String name);
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+
+    List<Category> findCategoriesByCodeContains(String code);
+    List<Category> findCategoriesByNameContains(String name);
 }

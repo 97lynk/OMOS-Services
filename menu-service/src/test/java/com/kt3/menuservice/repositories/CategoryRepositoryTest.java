@@ -55,7 +55,7 @@ public class CategoryRepositoryTest {
         categories.add(cat5);
 
         catCodes.add(cat1);
-        Mockito.when(categoryRepository.findCategoriesByCodeContains("MilkTea")).thenReturn(catCodes);
+       // Mockito.when(categoryRepository.findCategoriesByCodeContains("MilkTea")).thenReturn(catCodes);
 
         assertEquals(true, categoryRepository.findCategoriesByCodeContains("MilkTea").contains(cat1));
     }
