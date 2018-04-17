@@ -7,7 +7,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://kt3.mysql.database.azure.com:3306/kt3_omos?useUnicode=true&characterEncoding=utf-8&useSSL=true&requireSSL=false
