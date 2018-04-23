@@ -4,13 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OMOS-Services.iml" filepath="$PROJECT_DIR$/OMOS-Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/account-service/account-service.iml" filepath="$PROJECT_DIR$/account-service/account-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/account-service/account-service.iml" filepath="$PROJECT_DIR$/account-service/account-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/address-service/address-service.iml" filepath="$PROJECT_DIR$/address-service/address-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/address-service/address-service.iml" filepath="$PROJECT_DIR$/address-service/address-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/menu-service/menu-service.iml" filepath="$PROJECT_DIR$/menu-service/menu-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/menu-service/menu-service.iml" filepath="$PROJECT_DIR$/menu-service/menu-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/address-service/address-service.iml" filepath="$PROJECT_DIR$/address-service/address-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/oauth2-service/oauth2-service.iml" filepath="$PROJECT_DIR$/oauth2-service/oauth2-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/oauth2-service/oauth2-service.iml" filepath="$PROJECT_DIR$/oauth2-service/oauth2-service.iml" />
     </modules>
   </component>
