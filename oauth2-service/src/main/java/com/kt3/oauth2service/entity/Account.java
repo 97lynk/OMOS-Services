@@ -24,10 +24,12 @@ public class Account implements Serializable {
 
     private String userName;
 
+    @JsonIgnore
     private String password;
 
     private boolean enabled;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "accounts_roles",

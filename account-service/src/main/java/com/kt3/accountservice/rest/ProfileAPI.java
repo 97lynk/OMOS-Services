@@ -4,9 +4,12 @@ import com.kt3.accountservice.model.Profile;
 import com.kt3.accountservice.servive.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -15,6 +18,7 @@ import java.util.logging.Logger;
  */
 @RestController
 @RequestMapping("/profile")
+@PreAuthorize("#oauth2.hasScope('READ')")
 public class ProfileAPI {
 
     @Autowired
@@ -22,6 +26,7 @@ public class ProfileAPI {
 
     private static final Logger logger = Logger.getLogger(ProfileAPI.class.getName());
 
+    AbstractMap.SimpleEntry successMessage = new AbstractMap.SimpleEntry<>("message", "success");
 
     /**
      * Lấy danh sách profiles
@@ -31,9 +36,8 @@ public class ProfileAPI {
      * @privilege
      */
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<Profile> getAllProfiles() {
-        return accountService.selectProfiles();
+    public ResponseEntity<List<Profile> > getAllProfiles() {
+        return ResponseEntity.ok(accountService.selectProfiles());
     }
 
     /**
@@ -45,8 +49,8 @@ public class ProfileAPI {
      * @privilege
      */
     @GetMapping("/owner")
-    public Profile getOwnerProfile(OAuth2Authentication auth) {
-        return accountService.selectProfileByUserName(auth.getName());
+    public ResponseEntity<Profile> getOwnerProfile(OAuth2Authentication auth) {
+        return ResponseEntity.ok(accountService.selectProfileByUserName(auth.getName()));
     }
 
     /**
@@ -55,8 +59,8 @@ public class ProfileAPI {
      * @return
      */
     @GetMapping("/{id}")
-    public Profile getProfileById(@PathVariable("id") int id) {
-        return accountService.selectProfileById(id);
+    public ResponseEntity<Profile> getProfileById(@PathVariable("id") int id) {
+        return ResponseEntity.ok(accountService.selectProfileById(id));
     }
 
     /**
@@ -65,9 +69,9 @@ public class ProfileAPI {
      * @param profile profile cần thêm
      */
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addNewProfile(@RequestBody Profile profile) {
+    public ResponseEntity<?> addNewProfile(@RequestBody Profile profile) {
         accountService.insertProfile(profile);
+        return ResponseEntity.status(HttpStatus.CREATED).body(successMessage);
     }
 
     /**
@@ -76,10 +80,11 @@ public class ProfileAPI {
      * @param profile profile có id cũ, có các thuộc tính mới sẽ cập nhật
      */
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void changeProfile(@PathVariable("id") int id, @RequestBody Profile profile) {
+    public ResponseEntity<?> changeProfile(@PathVariable("id") int id, @RequestBody Profile profile) {
+        logger.info(profile.getBirthDay().toString());
         profile.setId(id);
         accountService.updateProfile(profile);
+        return ResponseEntity.ok(successMessage);
     }
 
 
@@ -89,9 +94,9 @@ public class ProfileAPI {
      * @param id
      */
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteProfile(@PathVariable int id) {
+    public ResponseEntity<?> deleteProfile(@PathVariable int id) {
         accountService.deleteProfile(id);
+        return ResponseEntity.ok(successMessage);
     }
 
 
