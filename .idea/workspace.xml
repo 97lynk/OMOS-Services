@@ -6,41 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab7cd475-8457-4b41-a882-b0dee0603a5f" name="Default" comment="Complete Address service">
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/.gitignore" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/.mvn/wrapper/maven-wrapper.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/.mvn/wrapper/maven-wrapper.properties" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/mvnw" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/mvnw.cmd" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/pom.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/AddressServiceApplication.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/config/CorsFilter.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/config/CustomAccessTokenConverter.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/config/JsonConfigurer.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/config/MethodSecurityConfig.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/config/OAuth2ResourceServerConfigJwt.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/model/Account.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/model/Address.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/responsitory/AccountResponsitory.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/responsitory/AddressResponsitory.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/rest/AddressApi.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/service/AddressService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/java/com/kt3/addressservice/service/AddressServiceImp.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/resources/application.yml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/main/resources/public_key.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/address-service/src/test/java/com/kt3/addressservice/AddressServiceApplicationTests.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="ab7cd475-8457-4b41-a882-b0dee0603a5f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/account-service/src/main/resources/application.yml" afterPath="$PROJECT_DIR$/account-service/src/main/resources/application.yml" />
-      <change beforePath="$PROJECT_DIR$/oauth2-service/src/main/resources/application.yml" afterPath="$PROJECT_DIR$/oauth2-service/src/main/resources/application.yml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/account-service/target/" />
     <ignored path="$PROJECT_DIR$/oauth2-service/target/" />
     <ignored path="$PROJECT_DIR$/address-service/target/" />
+    <ignored path="$PROJECT_DIR$/menu-service/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -455,7 +428,7 @@
       <workItem from="1524273837271" duration="2023000" />
       <workItem from="1524389115810" duration="1051000" />
       <workItem from="1524407627547" duration="6277000" />
-      <workItem from="1524455267295" duration="1119000" />
+      <workItem from="1524455267295" duration="1247000" />
     </task>
     <task id="LOCAL-00001" summary="Change response for PUT/ PUT/ DELETE with message if success&#10;Hash password while insert and update">
       <created>1523513377721</created>
@@ -471,11 +444,18 @@
       <option name="project" value="LOCAL" />
       <updated>1523981410735</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Complete Address service">
+      <created>1524456824042</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1524456824042</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76137000" />
+    <option name="totallyTimeSpent" value="76265000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -488,6 +468,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Azure Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
