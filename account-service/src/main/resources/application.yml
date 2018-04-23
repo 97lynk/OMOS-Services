@@ -1,5 +1,5 @@
-server:
-  port: 8080
+#server:
+#  port: 8080
 spring:
   jpa:
     show-sql: true
@@ -7,7 +7,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://kt3.mysql.database.azure.com:3306/kt3_omos?useUnicode=true&characterEncoding=utf-8&useSSL=true&requireSSL=false
@@ -15,9 +15,7 @@ spring:
     password: kt3@mysql
   application:
     name: Account Service
-  jackson:
-    date-format: dd/MM/yyyy
+    jackson:
     serialization:
-      WRITE_DATES_AS_TIMESTAMPS: false
-    time-zone: Asia/Ho_Chi_Minh
-    locale: vi_VN
+      time-zone: Asia/Ho_Chi_Minh
+      locale: vi_VN

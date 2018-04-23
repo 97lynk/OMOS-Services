@@ -4,10 +4,12 @@ import com.kt3.accountservice.model.Account;
 import com.kt3.accountservice.model.Profile;
 import com.kt3.accountservice.reponsitory.AccountRepository;
 import com.kt3.accountservice.reponsitory.ProfileReponsitory;
+import com.kt3.accountservice.reponsitory.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -19,6 +21,9 @@ public class AccountServiceImp implements AccountService {
 
     @Autowired
     private ProfileReponsitory profileReponsitory;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     @Override
@@ -38,7 +43,8 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public Profile insertProfile(Profile profile) {
-        Profile newProfile = new Profile(profile.getFirstName(), profile.getLastName(), profile.getBirthDay(), profile.getEmailAddress());
+        Profile newProfile = new Profile(profile.getFirstName(), profile.getLastName(), profile.getBirthDay(),
+                profile.getEmailAddress(), profile.getAccount_id());
         return profileReponsitory.save(newProfile);
     }
 
@@ -94,6 +100,7 @@ public class AccountServiceImp implements AccountService {
     @Override
     public Account insertAccount(Account account) {
         Account newAccount = new Account(account.getUserName(), BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()));
+        newAccount.setRoles(Arrays.asList(roleRepository.findByName("CUSTOMER")));
         return accountRepository.save(newAccount);
     }
 
