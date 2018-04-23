@@ -127,7 +127,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="36" />
     <option name="y" value="27" />
     <option name="width" value="1386" />
@@ -393,6 +393,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.MenuServiceApplication" />
         <item itemvalue="Spring Boot.MenuServiceApplication" />
       </list>
     </recent_temporary>
