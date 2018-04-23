@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -25,13 +26,18 @@ public class Account implements Serializable {
 
     private String password;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private Profile profile;
-
-
     private boolean enabled;
 
+    @OneToOne(mappedBy="account", fetch= FetchType.EAGER)
+    private Profile profile;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "accounts_roles",
+            joinColumns = @JoinColumn(
+            name = "account_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
 
     //contructors
     public Account() {
@@ -92,39 +98,12 @@ public class Account implements Serializable {
         this.profile = profile;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + ((userName == null) ? 0 : userName.hashCode());
-        return result;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Account acc = (Account) obj;
-        if (!userName.equals(acc.userName)) {
-            return false;
-        }
-        return true;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Account [id=").append(id)
-                .append(", userName=").append(userName)
-                .append(", password=").append(password)
-                .append(", enabled=").append(enabled);
-        return builder.toString();
-    }
 }

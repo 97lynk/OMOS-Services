@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-//@Component
+@Component
 public class Bootstrap implements CommandLineRunner {
 
 
@@ -72,7 +72,7 @@ public class Bootstrap implements CommandLineRunner {
 //        categoryRespository.save(bubleTea);
 //
 //        productRepository.save(p1);
-//        System.out.println("Data Loaded = " + categoryRespository.count() );
+        System.out.println("Data Loaded = " + categoryRespository.count() );
 //        List<Product> productList = productRepository.findProductsByCodeContainsOrNameContains("tra", "tra");
 //        for (Product p: productList
 //             ) {

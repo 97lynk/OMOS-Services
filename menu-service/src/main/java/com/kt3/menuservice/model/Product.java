@@ -1,5 +1,6 @@
 package com.kt3.menuservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class Product implements Serializable{
     private List<Image> moreImages = new ArrayList<>();
     private BigDecimal price;
 
-    @JsonIgnore
+
     @ManyToOne
     private Category category;
     private Date updateDate;
@@ -32,6 +33,20 @@ public class Product implements Serializable{
     private boolean hotFlag;
 
     public Product() {
+    }
+
+    public Product(String name, String code, String description, String thumbnail, List<Image> moreImages, BigDecimal price, Category category, Date updateDate, boolean status, int quantity, boolean hotFlag) {
+        this.name = name;
+        this.code = code;
+        this.description = description;
+        this.thumbnail = thumbnail;
+        this.moreImages = moreImages;
+        this.price = price;
+        this.category = category;
+        this.updateDate = updateDate;
+        this.status = status;
+        this.quantity = quantity;
+        this.hotFlag = hotFlag;
     }
 
     public Long getId() {

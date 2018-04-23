@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="account-service" />
         <module name="menu-service" />
+        <module name="address-service" />
         <module name="oauth2-service" />
         <module name="OMOS-Services" />
       </profile>
@@ -15,6 +16,7 @@
     <bytecodeTargetLevel>
       <module name="account-service" target="1.8" />
       <module name="menu-service" target="1.8" />
+      <module name="address-service" target="1.8" />
       <module name="oauth2-service" target="1.8" />
       <module name="OMOS-Services" target="1.5" />
     </bytecodeTargetLevel>
