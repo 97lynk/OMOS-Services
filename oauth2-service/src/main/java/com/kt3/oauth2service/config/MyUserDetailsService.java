@@ -46,5 +46,5 @@ public class MyUserDetailsService implements UserDetailsService {
                 true, fineGrained.getAuthorities(account.getRoles()));
     }
 
-    
+
 }
