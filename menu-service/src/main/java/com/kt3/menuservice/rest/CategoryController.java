@@ -12,7 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
+
     Logger logger = LoggerFactory.getLogger(CategoryController.class);
+
     @Autowired
     CategoryService categoryService;
     @GetMapping("")
