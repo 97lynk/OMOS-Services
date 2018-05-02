@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8083
 spring:
   jpa:
     show-sql: true
@@ -14,7 +14,7 @@ spring:
     username: TraSua@kt3
     password: kt3@mysql
   application:
-    name: Account Service
+    name: Menu Service
   jackson:
     date-format: dd/MM/yyyy
     serialization:
