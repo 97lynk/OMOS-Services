@@ -1,9 +1,5 @@
 package com.kt3.menuservice.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -24,23 +20,14 @@ public class Category implements Serializable{
     private Date updateDate;
     private boolean status;
 
-//may cai relation nay thuong thi json t bo qua
-    // t hay them vảr moi
-    //v do
-    //the thi no dau la class, no map voi database luon roi
-    //  umm phuc vu cho json thoi
-    //con dung trong code may cai duoi day van ok
-
     @ManyToOne
-    @JsonIgnore
     private Category parent;
+
     @OneToMany(mappedBy = "parent")
-    @JsonIgnore
     private List<Category> childs = new ArrayList<>();
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
-    @JsonIgnore
     private List<Product> products  = new ArrayList<>();
-    //trà sủi bọt ko có parent id là thằng 1
+
     public Category() {
     }
 

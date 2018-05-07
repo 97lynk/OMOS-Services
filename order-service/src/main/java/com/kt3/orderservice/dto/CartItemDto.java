@@ -1,54 +1,30 @@
-package com.kt3.orderservice.model;
+package com.kt3.orderservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kt3.orderservice.contanst.ICE_LEVEL;
 import com.kt3.orderservice.contanst.SUGAR_LEVEL;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import com.kt3.orderservice.model.Cart;
+import com.kt3.orderservice.model.Product;
 
-import javax.persistence.*;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
-@Entity
-public class CartItem {
+public class CartItemDto{
 
-    @Id
-    @GeneratedValue
-    private int id;
-
-    @Enumerated
     private ICE_LEVEL iceLevel;
 
-    @Enumerated
     private SUGAR_LEVEL sugarLevel;
 
     private int quantity;
 
     private BigDecimal subTotal;
 
-    @ManyToOne
-    private Product product;
+    private int productId;
 
-    @ManyToOne
-    @JsonIgnore
-    private Cart cart;
-
-
-    public CartItem() {
-    }
-
-    public CartItem(ICE_LEVEL iceLevel, SUGAR_LEVEL sugarLevel, int quantity, BigDecimal subTotal) {
-        this.iceLevel = iceLevel;
-        this.sugarLevel = sugarLevel;
-        this.quantity = quantity;
-        this.subTotal = subTotal;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public CartItemDto() {
     }
 
     public ICE_LEVEL getIceLevel() {
@@ -83,19 +59,16 @@ public class CartItem {
         this.subTotal = subTotal;
     }
 
-    public Product getProduct() {
-        return product;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    @Override
+    public String toString() {
+        return iceLevel + " " + sugarLevel + " " + productId;
     }
 }

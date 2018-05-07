@@ -28,8 +28,8 @@ public class Account implements Serializable {
 
     private boolean enabled;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
     //contructors
