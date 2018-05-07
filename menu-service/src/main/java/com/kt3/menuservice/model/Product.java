@@ -19,8 +19,10 @@ public class Product implements Serializable{
     private String code;
     private String description;
     private String thumbnail;
+
     @OneToMany(mappedBy = "product")
     private List<Image> moreImages = new ArrayList<>();
+
     private BigDecimal price;
 
     @JsonIgnore

@@ -19,8 +19,10 @@ public class Category implements Serializable{
     private String image;
     private Date updateDate;
     private boolean status;
+
     @ManyToOne
     private Category parent;
+
     @OneToMany(mappedBy = "parent")
     private List<Category> childs = new ArrayList<>();
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)

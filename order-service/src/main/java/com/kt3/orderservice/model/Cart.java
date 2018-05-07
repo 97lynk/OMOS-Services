@@ -16,12 +16,12 @@ public class Cart {
 
     private BigDecimal totalPrice;
 
-//    @OneToMany(mappedBy = "cart")
-//    private List<CartItem> cartItems = new ArrayList<>();
+    @OneToMany(mappedBy = "cart")
+    private List<CartItem> cartItems = new ArrayList<>();
 
-    @OneToOne(mappedBy = "cart")
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    private Account account;
+//    @OneToOne(mappedBy = "cart")
+//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+//    private Account account;
 
     public Cart() {
     }
@@ -43,20 +43,20 @@ public class Cart {
         this.totalPrice = totalPrice;
     }
 
-//    public List<CartItem> getCartItems() {
-//        return cartItems;
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+//
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+//
+//    public Account getAccount() {
+//        return account;
 //    }
 //
-//    public void setCartItems(List<CartItem> cartItems) {
-//        this.cartItems = cartItems;
+//    public void setAccount(Account account) {
+//        this.account = account;
 //    }
-
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }
