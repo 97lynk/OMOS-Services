@@ -1,17 +1,15 @@
-package com.kt3.menuservice.model;
+package com.kt3.menuservice.commands;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kt3.menuservice.model.Category;
+import com.kt3.menuservice.model.Product;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-@Entity
-public class Category implements Serializable{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CategoryWithProduct {
     private Long id;
     private String name;
     private String code;
@@ -19,28 +17,9 @@ public class Category implements Serializable{
     private String image;
     private Date updateDate;
     private boolean status;
-
-    @ManyToOne
-    private Category parent;
-
-    @OneToMany(mappedBy = "parent")
-    private List<Category> childs = new ArrayList<>();
-    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     private List<Product> products  = new ArrayList<>();
 
-    public Category() {
-    }
-
-    public Category(String name, String code, String description, String image, Date updateDate, boolean status, Category parent, List<Category> childs, List<Product> products) {
-        this.name = name;
-        this.code = code;
-        this.description = description;
-        this.image = image;
-        this.updateDate = updateDate;
-        this.status = status;
-        this.parent = parent;
-        this.childs = childs;
-        this.products = products;
+    public CategoryWithProduct() {
     }
 
     public Long getId() {
@@ -99,34 +78,11 @@ public class Category implements Serializable{
         this.status = status;
     }
 
-    public Category getParent() {
-        return parent;
-    }
-
-    public void setParent(Category parent) {
-        this.parent = parent;
-    }
-
-    public List<Category> getChilds() {
-        return childs;
-    }
-
-    public void setChilds(List<Category> childs) {
-        this.childs = childs;
-    }
-
     public List<Product> getProducts() {
         return products;
     }
 
     public void setProducts(List<Product> products) {
-//        for (Product p: products
-//             ) {
-//            p.setCategory(this);
-//
-//        }
         this.products = products;
-
-
     }
 }
