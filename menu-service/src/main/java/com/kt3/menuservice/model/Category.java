@@ -24,16 +24,11 @@ public class Category implements Serializable{
     private Date updateDate;
     private boolean status;
 
-//may cai relation nay thuong thi json t bo qua
-    // t hay them vảr moi
-    //v do
-    //the thi no dau la class, no map voi database luon roi
-    //  umm phuc vu cho json thoi
-    //con dung trong code may cai duoi day van ok
 
     @ManyToOne
     @JsonIgnore
     private Category parent;
+
     @OneToMany(mappedBy = "parent")
     @JsonIgnore
     private List<Category> childs = new ArrayList<>();

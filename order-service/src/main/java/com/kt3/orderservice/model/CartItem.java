@@ -1,12 +1,14 @@
 package com.kt3.orderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kt3.orderservice.contanst.ICE_LEVEL;
 import com.kt3.orderservice.contanst.SUGAR_LEVEL;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-//@Entity
+@Entity
 public class CartItem {
 
     @Id
@@ -23,10 +25,11 @@ public class CartItem {
 
     private BigDecimal subTotal;
 
-//    @ManyToOne
-//    private Product product;
+    @ManyToOne
+    private Product product;
 
     @ManyToOne
+    @JsonIgnore
     private Cart cart;
 
 
@@ -78,5 +81,21 @@ public class CartItem {
 
     public void setSubTotal(BigDecimal subTotal) {
         this.subTotal = subTotal;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
