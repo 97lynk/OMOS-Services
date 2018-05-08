@@ -11,7 +11,6 @@
         <module name="menu-service" />
         <module name="oauth2-service" />
         <module name="OMOS-Services" />
-        <module name="order-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -20,7 +19,6 @@
       <module name="menu-service" target="1.8" />
       <module name="oauth2-service" target="1.8" />
       <module name="OMOS-Services" target="1.5" />
-      <module name="order-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

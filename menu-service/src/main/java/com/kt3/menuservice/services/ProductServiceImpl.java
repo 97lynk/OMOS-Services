@@ -5,17 +5,17 @@ import com.kt3.menuservice.model.Product;
 import com.kt3.menuservice.repositories.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
     CategoryService categoryService;
+
 
     Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
 
@@ -28,6 +28,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> getProductHomePage(int catId, Pageable pageable) {
+        List<Product> productList = new ArrayList<>();
+
+        productRepository.findProductsByCategoryId(Long.valueOf(catId), pageable).iterator().forEachRemaining(productList::add);
+        return productList;
     }
 
     @Override

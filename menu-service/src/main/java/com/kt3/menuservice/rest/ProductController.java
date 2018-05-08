@@ -5,7 +5,9 @@ import com.kt3.menuservice.model.Product;
 import com.kt3.menuservice.services.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ public class ProductController {
         return productService.findById(Long.valueOf(id));
     }
 
+
     @GetMapping("/search")
     public List<Product> searchProduct(@RequestParam("s") String s){
         logger.info("Receive name: -----------" + s);
@@ -42,6 +45,11 @@ public class ProductController {
             return new ArrayList<Product>();
         }
         return productService.searchProduct(s);
+    }
+
+    @GetMapping("/getByCat")
+    public List<Product> getProductLimit(@RequestParam("cat") int cat, Pageable pageable){
+      return productService.getProductHomePage(cat, pageable);
     }
 
 }
