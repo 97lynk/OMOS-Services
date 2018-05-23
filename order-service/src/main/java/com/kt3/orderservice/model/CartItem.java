@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class CartItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private int id;
 
     @Enumerated
@@ -32,15 +32,7 @@ public class CartItem {
     @JsonIgnore
     private Cart cart;
 
-
     public CartItem() {
-    }
-
-    public CartItem(ICE_LEVEL iceLevel, SUGAR_LEVEL sugarLevel, int quantity, BigDecimal subTotal) {
-        this.iceLevel = iceLevel;
-        this.sugarLevel = sugarLevel;
-        this.quantity = quantity;
-        this.subTotal = subTotal;
     }
 
     public int getId() {

@@ -28,7 +28,7 @@ public class Account implements Serializable {
 
     private boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 

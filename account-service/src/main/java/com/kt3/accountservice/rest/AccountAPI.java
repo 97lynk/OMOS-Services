@@ -71,8 +71,8 @@ public class AccountAPI {
      */
     @PutMapping("/{id}")
     @PreAuthorize("#oauth2.hasAnyScope('READ')")
-    public ResponseEntity<?> changeAccount(@PathVariable("id") int id, @RequestBody Account account) {
-        account.setId(id);
+    public ResponseEntity<?> changeAccount(@PathVariable("id") int accountId, @RequestBody Account account) {
+        account.setId(accountId);
         accountService.updateAccount(account);
         return ResponseEntity.ok(successMessage);
     }
@@ -80,12 +80,12 @@ public class AccountAPI {
     /**
      * Xóa 1 account cụ thể
      *
-     * @param id
+     * @param accountId
      */
     @DeleteMapping("/{id}")
     @PreAuthorize("#oauth2.hasAnyScope('READ')")
-    public ResponseEntity<?> deleteAccount(@PathVariable int id) {
-        accountService.deleteAccount(id);
+    public ResponseEntity<?> deleteAccount(@PathVariable("id") int accountId) {
+        accountService.deleteAccount(accountId);
         return ResponseEntity.ok(successMessage);
 
     }

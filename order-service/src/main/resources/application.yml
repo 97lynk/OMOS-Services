@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 8084
 spring:
   jpa:
     show-sql: true
@@ -7,11 +7,11 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://kt3.mysql.database.azure.com:3306/kt3_omos?useUnicode=true&characterEncoding=utf-8&useSSL=true&requireSSL=false
     username: TraSua@kt3
     password: kt3@mysql
   application:
-    name: OAuth 2 Service
+    name: OrderTable Service

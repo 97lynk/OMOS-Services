@@ -5,6 +5,7 @@ import com.kt3.addressservice.model.Address;
 import com.kt3.addressservice.responsitory.AccountResponsitory;
 import com.kt3.addressservice.responsitory.AddressResponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,5 +69,10 @@ public class AddressServiceImp implements AddressService {
         if (!addressResponsitory.exists(id))
             throw new NoSuchElementException("This address is not exist");
         addressResponsitory.delete(id);
+    }
+
+    @Override
+    public Account selectAccountByAuth(OAuth2Authentication auth) {
+        return accountResponsitory.findAccountByUserName(auth.getName());
     }
 }
