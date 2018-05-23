@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class AddressServiceImp implements AddressService {
@@ -35,12 +37,14 @@ public class AddressServiceImp implements AddressService {
         Account account = accountResponsitory.findAccountByUserName(userName);
         if (account == null)
             throw new NoSuchElementException("This account is not exist");
-        return addressResponsitory.findAddressesByAccount_id(account.getId());
+        return addressResponsitory.findAddressesByAccount_id(account.getId()).stream()
+                .filter(Address::isEnable).collect(Collectors.toList());
     }
 
 
     @Override
     public Address insertAddress(Address address) {
+        address.setEnable(true);
         return addressResponsitory.save(address);
     }
 
@@ -51,6 +55,7 @@ public class AddressServiceImp implements AddressService {
 
         Address oldAddress = addressResponsitory.findOne(address.getId());
 
+        oldAddress.setEnable(true);
         oldAddress.setFullName(address.getFullName());
         oldAddress.setPhone(address.getPhone());
         oldAddress.setAddress(address.getAddress());
@@ -68,7 +73,9 @@ public class AddressServiceImp implements AddressService {
     public void deleleAddress(int id) throws NoSuchElementException {
         if (!addressResponsitory.exists(id))
             throw new NoSuchElementException("This address is not exist");
-        addressResponsitory.delete(id);
+        Address address = addressResponsitory.findOne(id);
+        address.setEnable(false);
+        addressResponsitory.save(address);
     }
 
     @Override
