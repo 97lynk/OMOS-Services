@@ -55,12 +55,12 @@ public class ProfileAPI {
 
     /**
      * Lấy profile theo id
-     * @param id
+     * @param profileId
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Profile> getProfileById(@PathVariable("id") int id) {
-        return ResponseEntity.ok(accountService.selectProfileById(id));
+    public ResponseEntity<Profile> getProfileById(@PathVariable("id") int profileId) {
+        return ResponseEntity.ok(accountService.selectProfileById(profileId));
     }
 
     /**
@@ -80,9 +80,9 @@ public class ProfileAPI {
      * @param profile profile có id cũ, có các thuộc tính mới sẽ cập nhật
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?> changeProfile(@PathVariable("id") int id, @RequestBody Profile profile) {
+    public ResponseEntity<?> changeProfile(@PathVariable("id") int profileId, @RequestBody Profile profile) {
         logger.info(profile.getBirthDay().toString());
-        profile.setId(id);
+        profile.setId(profileId);
         accountService.updateProfile(profile);
         return ResponseEntity.ok(successMessage);
     }

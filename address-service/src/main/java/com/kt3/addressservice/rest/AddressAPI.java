@@ -17,14 +17,14 @@ import java.util.logging.Logger;
 @RequestMapping("/address")
 @PreAuthorize("#oauth2.hasScope('READ')")
 
-public class AddressApi {
+public class AddressAPI {
 
     @Autowired
     private AddressService addressService;
 
     private AbstractMap.SimpleEntry successMessage = new AbstractMap.SimpleEntry<>("message", "success");
 
-    private static final Logger logger = Logger.getLogger(AddressApi.class.getName());
+    private static final Logger logger = Logger.getLogger(AddressAPI.class.getName());
 
     /**
      * Lấy danh sách địa chỉ
@@ -66,7 +66,8 @@ public class AddressApi {
      * @return
      */
     @PostMapping
-    public ResponseEntity<?> changeAddress(@RequestBody Address address) {
+    public ResponseEntity<?> changeAddress(@RequestBody Address address, OAuth2Authentication auth) {
+        address.setAccount_id(addressService.selectAccountByAuth(auth).getId());
         addressService.insertAddress(address);
         return ResponseEntity.status(HttpStatus.CREATED).body(successMessage);
     }

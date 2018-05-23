@@ -1,17 +1,17 @@
 package com.kt3.orderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kt3.orderservice.contanst.ICE_LEVEL;
 import com.kt3.orderservice.contanst.SUGAR_LEVEL;
 
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 public class OrderItem {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Enumerated
@@ -24,24 +24,15 @@ public class OrderItem {
 
     private BigDecimal subTotal;
 
-    private BigDecimal discount;
-
-//    @ManyToOne
-//    private Product product;
+    @ManyToOne
+    private Product product;
 
     @ManyToOne
-    private Cart cart;
+    @JsonIgnore
+    private OrderTable orderTable;
 
 
     public OrderItem() {
-    }
-
-    public OrderItem(ICE_LEVEL iceLevel, SUGAR_LEVEL sugarLevel, int quantity, BigDecimal subTotal, BigDecimal discount) {
-        this.iceLevel = iceLevel;
-        this.sugarLevel = sugarLevel;
-        this.quantity = quantity;
-        this.subTotal = subTotal;
-        this.discount = discount;
     }
 
     public int getId() {
@@ -84,27 +75,19 @@ public class OrderItem {
         this.subTotal = subTotal;
     }
 
-    public BigDecimal getDiscount() {
-        return discount;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-//    public Product getProduct() {
-//        return product;
-//    }
-//
-//    public void setProduct(Product product) {
-//        this.product = product;
-//    }
-
-    public Cart getCart() {
-        return cart;
+    public OrderTable getOrderTable() {
+        return orderTable;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setOrderTable(OrderTable orderTable) {
+        this.orderTable = orderTable;
     }
 }
