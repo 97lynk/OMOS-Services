@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -57,11 +58,21 @@ public class AccountAPI {
      */
     @PostMapping("/registration")
     public ResponseEntity<?> registrationAccount(@RequestBody Account account) {
+        HashMap<String, String> res = new HashMap<>();
+        if(accountService.existAccount(account.getUserName())){
+            res.put("status", "error");
+            res.put("message", "Số điện thoại này đã đăng kí.");
+            return ResponseEntity.ok(res);
+        }
+
         Account newAccount = accountService.insertAccount(account);
         Profile newProfile =  account.getProfile();
         newProfile.setAccount_id(newAccount.getId());
         accountService.insertProfile(newProfile);
-        return ResponseEntity.status(HttpStatus.CREATED).body(successMessage);
+
+        res.put("status", "success");
+        res.put("message", "Tài khoản đăng kí thành công");
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
     /**

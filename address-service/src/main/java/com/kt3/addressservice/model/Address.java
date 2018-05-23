@@ -33,6 +33,8 @@ public class Address {
 
     private int account_id;
 
+    private boolean enable;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "account_id",
@@ -134,5 +136,13 @@ public class Address {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

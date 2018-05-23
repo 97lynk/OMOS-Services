@@ -57,8 +57,8 @@ public class CartAPI {
     @GetMapping
     public ResponseEntity<Cart> getCart(OAuth2Authentication auth) {
         logger.info("Username " + auth.getName());
-        Account account = accountResponsitory.findAccountByUserName(auth.getName());
-        return ResponseEntity.ok(Optional.of(account.getCart()).orElse(new Cart()));
+        Cart cart = loadCartByAuth(auth);
+        return ResponseEntity.ok(cart);
     }
 
 
@@ -66,8 +66,8 @@ public class CartAPI {
     @GetMapping("/item")
     public ResponseEntity<List<CartItem>> getItemsInCart(OAuth2Authentication auth) {
         logger.info("Username " + auth.getName());
-        Account account = accountResponsitory.findAccountByUserName(auth.getName());
-        return ResponseEntity.ok(account.getCart().getCartItems());
+        Cart cart = loadCartByAuth(auth);
+        return ResponseEntity.ok(cart.getCartItems());
     }
 
     // add item to cart
@@ -267,7 +267,15 @@ public class CartAPI {
 
     // tìm giỏ hàng theo Auth
     private Cart loadCartByAuth(OAuth2Authentication oauth2) {
-        return accountResponsitory.findAccountByUserName(oauth2.getName()).getCart();
+        Account account = accountResponsitory.findAccountByUserName(oauth2.getName());
+        Cart cart = account.getCart();
+        if(cart == null){
+            cart = new Cart();
+            cart.setTotalPrice(new BigDecimal(0.0));
+            account.setCart(cartResponsitory.save(cart));
+            accountResponsitory.save(account);
+        }
+        return  cart;
     }
 
     // tính tiền 1 item

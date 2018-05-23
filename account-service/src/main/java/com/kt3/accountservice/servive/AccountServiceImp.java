@@ -101,6 +101,7 @@ public class AccountServiceImp implements AccountService {
     public Account insertAccount(Account account) {
         Account newAccount = new Account(account.getUserName(), BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()));
         newAccount.setRoles(Arrays.asList(roleRepository.findByName("CUSTOMER")));
+        newAccount.setEnabled(true);
         return accountRepository.save(newAccount);
     }
 
@@ -110,6 +111,11 @@ public class AccountServiceImp implements AccountService {
             throw new NoSuchElementException("This acount does not exist");
 
         accountRepository.delete(id);
+    }
+
+    @Override
+    public boolean existAccount(String userName) {
+        return accountRepository.existsAccountByUserName(userName);
     }
 
 

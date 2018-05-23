@@ -35,4 +35,6 @@ public interface AccountService {
     Account insertAccount(Account account);
 
     void deleteAccount(Integer id) throws NoSuchElementException;
+
+    boolean existAccount(String userName);
 }
