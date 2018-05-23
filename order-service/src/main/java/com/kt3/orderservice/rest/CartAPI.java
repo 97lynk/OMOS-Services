@@ -176,19 +176,21 @@ public class CartAPI {
         clearItemsInCart(auth);
 
 
-        String resBody = sendOTP(auth.getName());
+        String resBody = sendOTP(address.getPhone());
         ObjectMapper objectMapper = new ObjectMapper();
-        HashMap<String, String> res = new HashMap<>();
+        HashMap<String, Object> res = new HashMap<>();
         try {
             JsonNode root = objectMapper.readTree(resBody);
             String status = root.get("status").asText();
             if (status.contains("success")) {
                 String code = root.get("data").get("pin_code").asText();
                 savedOrder.setCode(code);
+                savedOrder = orderResponsitory.save(savedOrder);
                 res.put("status", status);
                 res.put("message", "Đã đặt hàng vui lòng xác nhận.");
+                res.put("data", savedOrder);
                 return ResponseEntity.ok(res);
-            }else {
+            } else {
                 res.put("status", status);
                 res.put("message", root.get("message").asText());
                 return ResponseEntity.ok(res);
@@ -198,15 +200,16 @@ public class CartAPI {
             res.put("message", "Lỗi");
             return ResponseEntity.ok(res);
         }
-        }
+    }
 
 
     @PostMapping("/submit")
     @Transactional
-    public ResponseEntity<?> submitCode(@RequestParam String code, OAuth2Authentication auth) {
+    public ResponseEntity<?> submitCode(@RequestParam String code, @RequestParam Integer orderId, OAuth2Authentication auth) {
         HashMap<String, String> res = new HashMap<>();
         try {
-            String resBody = confirmOTP(auth.getName(), code);
+            OrderTable order = orderResponsitory.findOne(orderId);
+            String resBody = confirmOTP(order.getAddress().getPhone(), code);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode data = objectMapper.readTree(resBody).get("data");
             boolean verified = data.get("verified").asBoolean();
@@ -216,8 +219,6 @@ public class CartAPI {
             if (verified) {
                 status = "success";
                 message = "Đã xác nhận đơn hàng thành công!";
-                Predicate<OrderTable> chuaXacNhan = o -> o.getOrder_status().equals(ORDER_STATUS.CHUA_XAC_NHAN);
-                OrderTable order = orderResponsitory.findAllByCode(code).stream().filter(chuaXacNhan).findFirst().get();
                 order.setOrder_status(ORDER_STATUS.DA_NHAN);
                 orderResponsitory.save(order);
             } else {
@@ -293,8 +294,8 @@ public class CartAPI {
         ResponseEntity<String> res = restTemplate.exchange
                 ("https://api.speedsms.vn/index.php/pin/create", HttpMethod.POST,
                         new HttpEntity<>(body, createHeaders("Rcotne4WpNsxH9jqt_J_jNEXCueRVRKY", "x")), String.class);
-        System.out.println(res.getBody().toString());
-        logger.info(res.getBody().toString());
+        logger.info("send: " + body);
+        logger.info("receive: " + res.getBody().toString());
         return res.getBody().toString();
     }
 
