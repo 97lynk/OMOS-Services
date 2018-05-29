@@ -3,11 +3,10 @@ package com.kt3.menuservice.rest;
 import com.kt3.menuservice.commands.CategoryWithProduct;
 import com.kt3.menuservice.model.Category;
 import com.kt3.menuservice.services.CategoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +14,8 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/category")
 public class CategoryController {
+
+    Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
     CategoryService categoryService;
